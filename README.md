@@ -20,18 +20,18 @@ It is designed for small companies and personal usage to show:
 
 InfoDisplay consists of 3 project areas: 
 
-* **[InfoDisplayNJS](#InfoDisplay-Backend-(InfoDisplayNJS))** the sever backend (based on NodeJS) 
-* **[InfoDisplayFE](#InfoDisplay-Frontend-(InfoDispalyFE))**  the client side frontend (based on AngularJS)
+* **[InfoDisplayNJS](#InfoDisplay-Backend)** the sever backend (based on NodeJS) 
+* **[InfoDisplayFE](#InfoDisplay-Frontend)**  the client side frontend (based on AngularJS)
 * **[RaspberrySetup](#Raspberry-PI-Setup-documentation-&-scripts-(RaspberrySetup))**  the rapsberry pi setup documentation and scripts 
  
 
-#### InfoDisplay Backend (InfoDisplayNJS)
+#### InfoDisplay Backend
  
 See [InfoDisplayNJS\README.md](./InfoDisplayNJS/README.md) for details.
 
 
 
-#### InfoDisplay Frontend (InfoDispalyFE)
+#### InfoDisplay Frontend
 
 See [InfoDisplayFE\README.md](./InfoDisplayFE/README.md) for details.
 
