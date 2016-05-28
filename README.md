@@ -19,25 +19,25 @@ It is designed for small companies or personal usage to show:
 - Traffic information, in the region of the company, using Bing Map API
 - Other information, Like an Agenda,Weather and other News information, using web-urls to available information on the internet.
 
-InfoDisplay consists of 3 project areas: 
+####InfoDisplay consists of 3 project areas: 
 
-* **[InfoDisplayNJS](#InfoDisplayNJS)** the sever backend (based on NodeJS) 
-* **[InfoDisplayFE](#IInfoDisplayFE)**  the client side frontend (based on AngularJS)
-* **[RaspberrySetup](#RPI-Setup)**  the rapsberry pi setup documentation and scripts 
+* **[InfoDisplay Backend (InfoDisplayNJS)](#InfoDisplayNJS)** the sever backend (based on NodeJS) 
+* **[InfoDisplay Frontend (InfoDisplayFE)](#IInfoDisplayFE)**  the client side frontend (based on AngularJS)
+* **[Raspberry Setup Scripts (RPI-Setup)](#RPI-Setup)**  the rapsberry pi setup documentation and scripts 
  
 
-#### <a name="InfoDisplayNJS"></a>InfoDisplay Backend
+#### <a name="InfoDisplayNJS"></a>InfoDisplay Backend (InfoDisplayNJS)
  
 See [InfoDisplayNJS\README.md](./InfoDisplayNJS/README.md) for details.
 
 
 
-#### <a name="InfoDisplayFE"></a>InfoDisplay Frontend
+#### <a name="InfoDisplayFE"></a>InfoDisplay Frontend (InfoDisplayFE)
 
 See [InfoDisplayFE\README.md](./InfoDisplayFE/README.md) for details.
 
 
-#### <a name="RPI-Setup"></a>Raspberry PI Setup documentation & scripts (RaspberrySetup)
+#### <a name="RPI-Setup"></a>Raspberry PI Setup documentation & scripts (RPI-Setup)
  
 See [RaspberrySetup\README.md](./RaspberrySetup/README.md) for details.
 
