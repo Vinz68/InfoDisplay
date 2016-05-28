@@ -8,13 +8,14 @@ an [iframe](http://www.w3schools.com/html/html_iframe.asp)
 ### Goals
 
 - Provide a cheap customizable kiosk-mode slide show for showing static and dynamic information
-- Must run on a cheap and small device which we can hide behind a big display (we did choose for Raspberry PI 3)
+- Must run on a cheap and small device which we can hidden behind a screen/monitor/TV (we use a Raspberry PI-3)
 - Device must be able to serve as a web server, so we can easily view remotely the information
 - Must provide in an easy interface to create the static content so anyone (with powerpoint experience) can do this.
 - Must be able to show full screen images (JPG) and dynamic web pages (also external Web URLs). 
 
-It is designed for small companies and personal usage to show:
-- Company information, created in PowerPoint and exported to JPG image files (see Info.ppx)
+It is designed for small companies or personal usage to show:
+- Company information, created in PowerPoint and exported to JPG image files...
+- ... or Personal info, like family agenda or message.
 - Traffic information, in the region of the company, using Bing Map API
 - Other information, Like an Agenda,Weather and other News information, using web-urls to available information on the internet.
 
