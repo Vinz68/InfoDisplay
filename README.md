@@ -20,23 +20,23 @@ It is designed for small companies and personal usage to show:
 
 InfoDisplay consists of 3 project areas: 
 
-* **[InfoDisplayNJS](#InfoDisplay-Backend)** the sever backend (based on NodeJS) 
-* **[InfoDisplayFE](#InfoDisplay-Frontend)**  the client side frontend (based on AngularJS)
-* **[RaspberrySetup](#Raspberry-PI-Setup-documentation-&-scripts-(RaspberrySetup))**  the rapsberry pi setup documentation and scripts 
+* **[InfoDisplayNJS](#InfoDisplayNJS)** the sever backend (based on NodeJS) 
+* **[InfoDisplayFE](#IInfoDisplayFE)**  the client side frontend (based on AngularJS)
+* **[RaspberrySetup](#RPI-Setup)**  the rapsberry pi setup documentation and scripts 
  
 
-#### InfoDisplay Backend
+#### <a name="InfoDisplayNJS"></a>InfoDisplay Backend
  
 See [InfoDisplayNJS\README.md](./InfoDisplayNJS/README.md) for details.
 
 
 
-#### InfoDisplay Frontend
+#### <a name="InfoDisplayFE"></a>InfoDisplay Frontend
 
 See [InfoDisplayFE\README.md](./InfoDisplayFE/README.md) for details.
 
 
-#### Raspberry PI Setup documentation & scripts (RaspberrySetup)
+#### <a name="RPI-Setup"></a>Raspberry PI Setup documentation & scripts (RaspberrySetup)
  
 See [RaspberrySetup\README.md](./RaspberrySetup/README.md) for details.
 
@@ -59,6 +59,3 @@ https://github.com/jsor/jcarousel
 http://www.w3schools.com/bootstrap/bootstrap_carousel.asp
 
 
-### end section
-
-The end
