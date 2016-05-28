@@ -1,4 +1,4 @@
-﻿## InfoDisplay
+## InfoDisplay
 
 InfoDisplay is a simple solution for showing information, full screen in a kind of kiosk-mode slide show, using a client side web browser and server side NodeJS program.
 It can show any number of images (JPG) and/or web pages, providing that the web URL can be embeded in 
