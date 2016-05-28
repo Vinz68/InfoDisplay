@@ -1,4 +1,4 @@
-﻿## InfoDisplay Backend (InfoDisplayNJS)
+## InfoDisplay Backend (InfoDisplayNJS)
 
 InfoDisplay is a simple solution for showing information (in a kind of kiosk-mode slide show) using a client side web browser and server side NodeJS program.
 It can show any number of images (JPG) and/or web pages (which can be embeded in an iFrame).
