@@ -1,0 +1,35 @@
+{
+  "timestamp": "2016-05-11T20:34:48Z",
+  "pages": [
+    {
+      "title": "Slides",
+      "type": "webpage",
+      "interval": 27500,
+      "url": "http://powerpointpi/showslides.html"
+    },
+    {
+      "title": "Temperatuur & Wind",
+      "type": "webpage",
+      "interval": 5000,
+      "url": "http://powerpointpi/weer.html"
+    },
+    {
+      "title": "Regen",
+      "type": "webpage",
+      "interval": 15000,
+      "url": "http://powerpointpi/regen.html"
+    },
+    {
+      "title": "Verkeer",
+      "type": "webpage",
+      "interval": 10000,
+      "url": "http://10.176.98.35/verkeer.html"
+    },
+    {
+      "title": "VerkeerGoogle",
+      "type": "webpage",
+      "interval": 10000,
+      "url": "http://powerpointpi/verkeerg.html"
+    }
+  ]
+}

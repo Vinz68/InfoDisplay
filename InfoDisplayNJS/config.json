@@ -1,0 +1,6 @@
+{
+  "numberOfImages": "4",
+  "filePrefix": "Slide",
+  "filePostfix": ".JPG",
+  "src": "./images/"
+}
