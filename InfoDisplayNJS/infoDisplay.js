@@ -9,7 +9,7 @@
 // 2016-05-29 Vincent van Beek
 //-----------------------------------------------------------------------------------------------------
 var express = require('express');           // Node.js web application framework
-var fs = require('fs');                     // We will use the naive file system
+var fs = require('fs');                     // We will use the native file system
 var chokidar = require('chokidar');			// Used to watch a folder or file.
 var log4js = require('log4js'); 			// Logger module to log into files
 
