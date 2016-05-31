@@ -21,10 +21,6 @@ var imagesList = [];                        // Array with slide images (JPGs)
 var pagesList = [];	                        // Array with slide (web) pages (URLs and settings)
 
 
-var slidesHandler = require('./modules/newSlidesHandler.js');    // Monitors share on new PPT-slides (JPGs) and create a html page for each slide
-
-
-
 //------------------------------------------------------------------------------------------------------
 // Setup logging
 log4js.loadAppender('file');
@@ -35,14 +31,17 @@ var logger = log4js.getLogger('InfoDisplay');
 // future do: log4js.configure('my_log4js_configuration.json', { reloadSecs: 300 });
 // see: https://github.com/nomiddlename/log4js-example/blob/master/app.js
 
-
 // Log that w're starting
 logger.info('Starting InfoDisplay...');
 
-// Monitors a directory on JPG images and generates HTML pages showing the JPG full screen.
+
+
+//------------------------------------------------------------------------------------------------------
+// Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
+var slidesHandler = require('./modules/newSlidesHandler.js');    
+
 // ==> To-Do, setup callback in handler (when new HTML pages are generated)
 slidesHandler.init();
-//logger.info("Slides Handler initiated on directory: " + slidesHandler.displayPath());
 
 
 
@@ -102,6 +101,15 @@ app.get('/images', function (req, res, next) {
 	logger.info('get-images requested. returning the array with IDs and SRCs');
 	res.contentType('application/json');
 	res.send(JSON.stringify(imagesList, null, 4));
+});
+
+app.get('/slides', function (req, res, next) {
+    // Send the list of slides (web pages /URLs) on request.
+
+    logger.info('get-slides requested. returning the array with urls and settings');
+
+    res.contentType('application/json');
+    res.send(JSON.stringify(slidesHandler.getSlides(), null, 4));
 });
 
 

@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>WebNews</title>
+    <meta name="viewport" content="width=1920;">
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+
+  </head>
+
+  <body class="">
+  	<div class="navbar">
+      <div class="navbar-inner">
+        <button class="btn btn-medium btn-primary pull-right" id="run" type="button">Run Tabs</button>
+
+        <select id="aspect" class="select pull-right">
+	        <option value="width=1920">1080p</option>
+	        <option value="width=1280">720p</option>
+	        <option value="width=device-width">mobile</option>
+        </select>
+      </div> <!-- /navbar-inner -->
+    </div> <!-- /navbar -->
+    <div class="container">
+    	<div class="tabs"></div>
+        <div id="pages_data"></div>
+
+    </div> <!-- /container -->
+     
+
+
+    <!-- javascript, Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="app/app.js"></script>
+  </body>
+</html>
