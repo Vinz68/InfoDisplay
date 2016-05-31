@@ -1,0 +1,21 @@
+@lxpanel --profile LXDE-pi
+@pcmanfm --desktop --profile LXDE-pi
+
+#@sudo rm -f /home/pi/noticeboard/.lock.noticeboard.odp
+#@soffice --show /home/pi/noticeboard/noticeboard.odp --norestore
+
+#------------------------------------------------------------
+# Startup in kiosk mode with internet browser fullscreen.
+# and screensaver disabled.
+
+@xset -dpms # disable DPMS (Energy Star) features.
+@xset s off # disable screen saver
+@xset s noblank # don't blank the video device
+
+@/home.pi/scripts/infoDisplayStartBrowser.sh
+
+#-------------------------------------------------------------
+
+
+
+

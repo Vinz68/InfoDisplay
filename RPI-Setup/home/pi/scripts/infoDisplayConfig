@@ -1,0 +1,10 @@
+# samba share where powerpoint (JPG) images will be dropped.
+jpg_folder=/var/powerpoint_samba
+
+# tag to use for logging into syslog:
+tag=InfoDisplay
+
+# log function 
+function log {
+	/usr/bin/logger -t $tag $1 
+}
