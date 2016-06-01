@@ -13,13 +13,15 @@ var fs = require('fs');                     // We will use the native file syste
 var chokidar = require('chokidar');			// Used to watch a folder or file; see https://github.com/paulmillr/chokidar
 var log4js = require('log4js'); 			// Logger module, used to log into files
 var path = require('path');                 // Directory and file operations 
-//var slides = require('./modules/slides.json');      // The (persitent) information of the slides (html pages) 
+var config = require('./newSlidesHandler.json');      // The (persitent) information of the slides (html pages) 
 
+//var child_process = require("child_process");   // Used to execute native shell commands.
+//var hostnameFQDN;
 
 // TODO: set this in a newSlidesHandler.json config file
-var slidesDirectory = '/var/powerpoint_samba/*.JPG';
-var imageDirectory = '/home/pi/InfoDisplay/html/images/';
-var htmlDirectory = '/home/pi/InfoDisplay/html/';
+//var slidesDirectory = '/var/powerpoint_samba/*.JPG';
+//var imageDirectory = '/home/pi/InfoDisplay/html/images/';
+//var htmlDirectory = '/home/pi/InfoDisplay/html/';
 
 var slidesFile = "./modules/slides.json";   // The (persitent) information of the slides (html pages) in JSON format.
 var slidesObj;                              // Javascript object, which holds the JSON slidesFile
@@ -43,24 +45,28 @@ logger.info('Starting NewSlidesHandler...');
 
 function init() {
 
-    var dirname = path.dirname(slidesDirectory);
+    var dirname = path.dirname(config.slidesDirectory);
 
     try {
+        logger.info('init: Starting...');
+
         // Check that slidesDirectory (path) exists
         fs.accessSync(dirname, fs.F_OK);
-        logger.info(__filename + '-init SlidesDirectory: ' + dirname + ' is accessable');
+        logger.info('init: SlidesDirectory: ' + dirname + ' is accessable');
 
         // read the last generated file which hold the current set of Slides (html pages with powerpoint JPG images).
-        logger.info(__filename + '-init Read and parse JSON file: ' + slidesFile + ' ....');
+        logger.info( 'init: Read and parse JSON file: ' + slidesFile + ' ....');
         slidesObj = JSON.parse(fs.readFileSync(slidesFile, 'utf8'));
 
         // Set a file watcher on the "slidesDirectory"
-        watchForNewSlides(slidesDirectory);
+        watchForNewSlides(config.slidesDirectory);
+
+        logger.info('init: Completed succesfully.');
 
     } catch (e) {
         // It isn't accessible
-        logger.error(__filename + '-init SlidesDirectory: ' + dirname + ' is NOT accessable');
-        logger.error(__filename + ' Error: ' + e);
+        logger.error('init: SlidesDirectory: ' + dirname + ' is NOT accessable');
+        logger.error('init: Error: ' + e);
     }
 }
 
@@ -71,7 +77,7 @@ function getSlides() {
 
 
 function getPath() {
-    return slidesDirectory;
+    return config.slidesDirectory;
 }
 
 
@@ -160,7 +166,7 @@ function generateHtmlFile(element, index, array) {
     var fileName = element;
 
     // Move the file from the Samba Share to the "html/images" folder.
-    move(fileName, imageDirectory + path.basename(fileName), function (err) {
+    move(fileName, config.imageDirectory + path.basename(fileName), function (err) {
 
         // If an error occurred, handle it (throw, propagate, etc)
         if (err) {
@@ -168,10 +174,10 @@ function generateHtmlFile(element, index, array) {
             return;
         }
         // Otherwise, the file should be moved
-        logger.info('file: ' + fileName + 'is moved to: ' + imageDirectory + path.basename(fileName));
+        logger.info('file: ' + fileName + 'is moved to: ' + config.imageDirectory + path.basename(fileName));
 
         // Create one html file for each slide (JPG image)
-        generateHtmlPage(path.basename(fileName));
+        generateHtmlPage(path.basename(fileName), index);
     });
 
 }
@@ -182,22 +188,17 @@ function updateSlidesJson() {
 
         logger.info("Update slides.json file....");
 
-        // TODO:
+        // delete all "pages" rows from the slides.json (in memory) structure.
+        logger.info("Delete all slide-pages from slides.JSON structure....");
+        slidesObj.pages.splice(0, slidesObj.pages.length );
 
-        // delete or empty the ./slides.json file (or use the slidesObj to do this)
-        logger.info("Deleting pages from JSON structure....");
-        delete slidesObj.pages;
 
-        // Get current time stamp, and add to JSON file
+        // Get current time stamp, and add update the JSON structure
         logger.info("Updating timestamp attribute in JSON stucture....");
-
-        var currentTime = new Date().getTime();
-        slidesObj.timestamp = currentTime;
+        slidesObj.timestamp = new Date().toLocaleString();
 
         // ForEach file in the array (newSlidesObj)
         logger.info("Add pages in JSON stucture....");
-
-        // ====> TODO: First aad slidesObj.pages ? (or not delete slidesObj.pages; but delete sldesObj.pages[0 to length-1]
 
         for (var x = 0; x < newSlidesArray.length; x++) {
             // Create a page attributes and store in JSON format on disk.
@@ -209,19 +210,29 @@ function updateSlidesJson() {
             */
 
             slidesObj['pages'].push({
-                "title": "Cerner Info - Slide" + x,
+                "title": "Cerner Info - " + path.basename(newSlidesArray[x], '.JPG'),
                 "type": "webpage",
                 "interval": 5000,
-                "url": "http://powerpointpi/" + path.basename(newSlidesArray[x]) + ".JPG.html"
+                "url": "http://"+ config.hostnameFQDN + "/" + path.basename(newSlidesArray[x]) + ".html"
             });
         }
 
-        // TODO: Save  slidesObj to disk (slides.json)
-        logger.info("TODO: Save  slidesObj to disk (slides.json)....");
+        // Show new JSON structure in Log file
+        // TODO: Sort the array ??   => Slide0---Slidex (since processing files will not be alphabetic)
+        logger.info('/slides =>' + JSON.stringify(slidesObj, null, 4));
+
+        // Save JSON (slidesObj) to disk (slides.json)
+        fs.writeFile(slidesFile, JSON.stringify(slidesObj, null, 4), function (err) {
+            if (err) {
+                logger.error("Save slidesObj to disk (slides.json) has failed");
+                throw err;
+            }
+            logger.info("Save slideObj to disk (slides.json) has been succeeded.");
+        });
 
     }
     catch (e) {
-        logger.error("Something went wrong during saving the slides.json file. Error= " + e);
+        logger.error("Something went wrong during updating or saving the slides.json file. Error= " + e);
     }
     finally {
 
@@ -260,22 +271,27 @@ function move(oldPath, newPath, callback) {
     }
 }
 
-function generateHtmlPage(JPGFileName) {
+function generateHtmlPage(JPGFileName, index) {
 
-    fs.readFile(htmlDirectory+'/slide_template.html', 'utf8', function (err, data) {
+    fs.readFile(config.htmlDirectory+'/slide_template.html', 'utf8', function (err, data) {
         if (err) {
             return logger.error(err);
         }
 
-        var replaceBy = './images/'+JPGFileName;
-        var result = data.replace(/@@IMAGE-FILE-NAME@@/g, replaceBy);
+        var replaceByFileName = './images/' + JPGFileName;
+        var replaceByFileDescription = 'Cerner Info-Slide-' + index;
+
+        logger.info("Generate HTML page will embed slide#:" + index + " JPG:" + replaceByFileName);
+
+        var result = data.replace(/@@IMAGE-FILE-NAME@@/g, replaceByFileName);
+        result = result.replace(/@@IMAGE-FILE-DESCRIPTION@@/g, replaceByFileDescription);
         
-        fs.writeFile(htmlDirectory + JPGFileName+ '.html', result, 'utf8', function (err) {
+        fs.writeFile(config.htmlDirectory + JPGFileName+ '.html', result, 'utf8', function (err) {
             if (err) {
                 return logger.error(err);
             }
 
-            logger.info('HTML page generated:' + htmlDirectory + JPGFileName + '.html');
+            logger.info('HTML page generated:' + config.htmlDirectory + JPGFileName + '.html');
         });
     });
 }

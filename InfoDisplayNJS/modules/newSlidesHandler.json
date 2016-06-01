@@ -1,0 +1,6 @@
+﻿{
+  "hostnameFQDN": "infodisplay.cerner.com",
+  "slidesDirectory": "/var/powerpoint_samba/*.JPG",
+  "imageDirectory": "/home/pi/InfoDisplay/html/images/",
+  "htmlDirectory": "/home/pi/InfoDisplay/html/"
+}

@@ -8,17 +8,20 @@
 // 
 // 2016-05-29 Vincent van Beek
 //-----------------------------------------------------------------------------------------------------
-var express = require('express');           // Node.js web application framework
+var express = require('express');           // Express web application framework. http://expressjs.com/ 
 var fs = require('fs');                     // We will use the native file system
-var chokidar = require('chokidar');			// Used to watch a folder or file.
 var log4js = require('log4js'); 			// Logger module to log into files
 
 var config = require('./config.json');      // The configuration of this module.
 
+var slidesHandler = require('./modules/newSlidesHandler.js');   //  Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
+
 var app = express();                        // W're using Express
-var port = 8081;                            // Node will listen on port number...
-var imagesList = [];                        // Array with slide images (JPGs)
-var pagesList = [];	                        // Array with slide (web) pages (URLs and settings)
+var port = 8081;                              // Node will listen on port number...
+var hostname = 'localhost';                 // our hostname
+
+var pagesList = [];	                        // Array with pages (URLs and settings) to be shown by the client browser in a slide show.
+
 
 
 //------------------------------------------------------------------------------------------------------
@@ -35,57 +38,26 @@ var logger = log4js.getLogger('InfoDisplay');
 logger.info('Starting InfoDisplay...');
 
 
-
 //------------------------------------------------------------------------------------------------------
 // Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
-var slidesHandler = require('./modules/newSlidesHandler.js');    
-
-// ==> To-Do, setup callback in handler (when new HTML pages are generated)
 slidesHandler.init();
 
-
-
-logger.info('Config numberOfImages=' + config.numberOfImages);
-
-//-------------------------------------------------------------------------------------------------------
-// Build list of slide images (JPG files)
-logger.info('List of images (JPGs):');
-var imageId, sourceId;
-for (var i=0; i<config.numberOfImages; i++){
-    imageId = 'image' + i;
-	sourceId = config.src + config.filePrefix + i + config.filePostfix;
-	imagesList.push({ id: imageId, src: sourceId });
-}
-logger.info('--->' + JSON.stringify(imagesList));
+// Show in logfile what to expect on a app.get- /slides 
+logger.info('/slides =>' + JSON.stringify(slidesHandler.getSlides(), null, 4));
 
 
 //-------------------------------------------------------------------------------------------------------
-// Load list of (web) pages and its settings (JPG files)
-logger.info('List of pages (URLs and settings):');
+// Load list of configured web-pages and its settings.
+logger.info('Load configured pages (pages.json)');
 pagesList = JSON.parse(fs.readFileSync('./pages.json', 'utf8'));
-logger.info('--->' + JSON.stringify(pagesList));
+logger.info('/pages =>' + JSON.stringify(pagesList, null, 4));
 
-	
- //--------------------------------------------------------------------------------------------------------
-// File watch on the config file
-var watcher = chokidar.watch('./config.json', {
-  ignored: /[\/\\]\./, persistent: true
-});
 
-watcher
-  .on('add', function(path) { logger.debug('File', path, 'has been added'); })
-  .on('change', function(path) { logger.debug('File', path, 'has been changed'); })
-  .on('unlink', function(path) { logger.debug('File', path, 'has been removed'); })
-  .on('error', function(error) { logger.debug('Error happened', error); })
-  .on('ready', function() { logger.debug('Initial scan complete. Ready for changes.'); })
-  .on('raw', function(event, path, details) { logger.debug('Raw event info:', event, path, details); })
+//--------------------------------------------------------------------------------------------------------
 
-// 'add', 'addDir' and 'change' events also receive stat() results as second
-// argument when available: http://nodejs.org/api/fs.html#fs_class_fs_stats
-watcher.on('change', function(path, stats) {
-  if (stats) logger.debug('File', path, 'changed size to', stats.size);
-});
-
+// static link the "www-root" folder to http://hostname/info
+app.use('/', express.static('html'));
+logger.info('Mapped html subfolder to http://[hostname]');
 
 app.use(function (req, res, next) {
     // CORS: Allow cross-domain requests (blocked by default) 
@@ -94,14 +66,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-
-app.get('/images', function (req, res, next) {
-	// Send the list of slide images (JPG files) on request.
-	
-	logger.info('get-images requested. returning the array with IDs and SRCs');
-	res.contentType('application/json');
-	res.send(JSON.stringify(imagesList, null, 4));
-});
 
 app.get('/slides', function (req, res, next) {
     // Send the list of slides (web pages /URLs) on request.
@@ -125,9 +89,11 @@ app.get('/pages', function (req, res, next) {
 var server = app.listen(port, function () {
     // Setup the server / start listening on configured IP & Port.
 
-    var host = server.address().address;
-  logger.info("InfoDisplay app listening at http://%s:%s", host, server.address().port);
+    logger.info('InfoDisplay app listening at http://' + server.address().address + ":" + server.address().port);
 });
+
+
+
 
 
 
