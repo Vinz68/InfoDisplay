@@ -1,0 +1,68 @@
+﻿html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+
+  background: none;
+  background-color: white;
+}
+
+body:not(.active) {
+    padding:20px;
+}
+
+body.active .navbar, body.active .inputs {
+    display: none;
+}
+
+body.active .container {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+body .tabs { 
+    display:none; 
+    height: 100%;
+    width: 100%;
+}
+
+body.active .tabs { 
+    display: block 
+}
+
+body.active .tab { 
+    display: none; 
+}
+
+body.active .tab.active { 
+    display: block; 
+}
+
+.navbar select{
+    margin: 5px;
+}
+
+.thumbnails li a {
+    padding: 40px;
+}
+
+input[type=text] {
+    width:100%;
+}
+
+#slide {
+  min-height: 100%;
+  min-width: 800px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+
+
+

@@ -17,7 +17,7 @@ var config = require('./config.json');      // The configuration of this module.
 var slidesHandler = require('./modules/newSlidesHandler.js');   //  Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
 
 var app = express();                        // W're using Express
-var port = 8081;                              // Node will listen on port number...
+var port = 80;                              // Node will listen on port number...
 var hostname = 'localhost';                 // our hostname
 
 var pagesList = [];	                        // Array with pages (URLs and settings) to be shown by the client browser in a slide show.

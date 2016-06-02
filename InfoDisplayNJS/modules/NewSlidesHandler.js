@@ -143,6 +143,8 @@ function processNewSlides() {
         processingNewSlides = true;
 
         if (newSlidesArray.length > 0) {
+            // Sort the array (on file name) and generate for each JPG file a HTML page
+            newSlidesArray.sort();
             newSlidesArray.forEach(generateHtmlFile);
 
             // Create new JSON file which hold the slides (html pages).
