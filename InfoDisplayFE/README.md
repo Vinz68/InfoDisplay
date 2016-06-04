@@ -28,11 +28,3 @@ InfoDisplayFE is based on:
 ## Building/Testing
 
 
-
-## Adding documentation
-Use [ESDoc](https://esdoc.org/) to generate API documentation. 
-Refer to ESDoc's documentation for syntax. Run `npm run build_docs` to generate.
-
-
-
-
