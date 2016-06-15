@@ -9,11 +9,13 @@
     pagesList = [];                         // Array with web pages to show in a slide-show.
     tabNr = 0;                              // Currently shown tab number
 
+    titleShowing = false;
+
 
 //var host = "powerpointpi.fritz!box.com:8081"; // (@home) Hostname + port where NodeJS REST-API is located(192.168.178.58)
-var host = "infodisplay.cerner.com";     // (Cerner) Hostname + port where NodeJS REST-API is located
-var slidesUrl = "http://" + host + "/slides";  // REST-API address to get list of (html) slide pages (embedding the PPTX- JPG images)
-var pagesUrl = "http://" + host + "/pages";    // REST-API address to get list of (html) pages
+var host = "infodisplay.cerner.com";            // (Cerner) Hostname + port where NodeJS REST-API is located
+var slidesUrl = "http://" + host + "/slides";   // REST-API address to get list of (html) slide pages (embedding the PPTX- JPG images)
+var pagesUrl = "http://" + host + "/pages";     // REST-API address to get list of (html) pages
 
 
 // Loading of the web pages (in iframes)
@@ -59,26 +61,31 @@ function nextTabpage() {
         if( up.next().length>0 ) {
             up.next().addClass('active');
             tabNr++;
-            setTimeout(nextTabpage, pagesList.pages[tabNr].interval);
+            timer = setTimeout(nextTabpage, pagesList.pages[tabNr].interval);
             return;
         }
     }
     $('.tabs .tab:first').addClass('active'); // display first if no next
     tabNr=0;
-    setTimeout(nextTabpage, pagesList.pages[tabNr].interval);
+    timer = setTimeout(nextTabpage, pagesList.pages[tabNr].interval);
 }
 
 function showTitle(flag) {
 
-    if (flag==true)
+    if ((flag == true) && (titleShowing == false))
     {
         var title_info1 = "<h1 class='text-center'>Cerner Information Display</h1>";
         $(title_info1).appendTo("#title_info");
         var title_info2 = "<h2 class='text-center'>– InfoDisplay –</h2>";
         $(title_info2).appendTo("#title_info");
+
+        titleShowing = true;
     }
-    else
+    else if (flag == false)
+    {
         $("#title_info").empty();
+        titleShowing = false;
+    }
 }
 
 
@@ -131,7 +138,10 @@ $(window).resize(function () {
 
 
 $(window).keyup(function (e) {
-    if (e.keyCode == 27){ 
+
+    // Esc-pressed ?
+    if (e.keyCode == 27) {
+        clearTimeout(timer);
         if( $('body').hasClass('active') ){
             if( timer ) clearInterval(timer);
             $('body').removeClass('active');
@@ -139,5 +149,12 @@ $(window).keyup(function (e) {
         }
 
         showTitle(true);
+    }
+    // '+' pressed ?
+    else if ((e.keyCode == 43) || (e.keyCode == 187) )
+    {
+        clearTimeout(timer);
+        nextTabpage();
+
     }
 });

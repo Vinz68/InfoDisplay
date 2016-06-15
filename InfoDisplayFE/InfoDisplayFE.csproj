@@ -68,12 +68,14 @@
   <ItemGroup>
     <Content Include="app\app-sliding.js" />
     <Content Include="app\app.js" />
+    <Content Include="CernerSearch.html" />
     <Content Include="Content\app-sliding.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="index - Copy.html" />
     <Content Include="index.html" />
     <Content Include="pages.html" />
     <Content Include="index_angular.html" />
@@ -93,6 +95,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="weer.html" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />

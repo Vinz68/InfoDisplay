@@ -1,29 +1,18 @@
 {
-  "timestamp": "2016-05-11T20:34:48Z",
+  "timestamp": "2016-06-16T11:13:48Z",
   "pages": [
     {
-      "title": "Temperatuur & Wind",
-      "type": "webpage",
-      "interval": 5000,
-      "url": "http://infoDisplay.cerner.com/weer.html"
-    },
-    {
-      "title": "Regen - Buienradar",
+      "title": "Weer - Buienradar",
       "type": "webpage",
       "interval": 15000,
-      "url": "http://infoDisplay.cerner.com/regen.html"
+      "url": "http://infoDisplay.cerner.com/weer.html"
     },
     {
       "title": "Verkeer - BingMap",
       "type": "webpage",
       "interval": 10000,
       "url": "http://infoDisplay.cerner.com/verkeer.html"
-    },
-    {
-      "title": "Verkeer - GoogleMap",
-      "type": "webpage",
-      "interval": 10000,
-      "url": "http://infoDisplay.cerner.com/verkeerg.html"
     }
+
   ]
 }

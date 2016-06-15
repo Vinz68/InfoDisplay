@@ -11,9 +11,8 @@
 var express = require('express');           // Express web application framework. http://expressjs.com/ 
 var fs = require('fs');                     // We will use the native file system
 var log4js = require('log4js'); 			// Logger module to log into files
-
 var config = require('./config.json');      // The configuration of this module.
-
+var os = require('os');                     // OS specific info
 var slidesHandler = require('./modules/newSlidesHandler.js');   //  Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
 
 var app = express();                        // W're using Express
@@ -57,7 +56,7 @@ logger.info('/pages =>' + JSON.stringify(pagesList, null, 4));
 
 // static link the "www-root" folder to http://hostname/info
 app.use('/', express.static('html'));
-logger.info('Mapped html subfolder to http://[hostname]');
+logger.info('Mapped html subfolder to http://'+ os.hostname() );
 
 app.use(function (req, res, next) {
     // CORS: Allow cross-domain requests (blocked by default) 
@@ -89,22 +88,7 @@ app.get('/pages', function (req, res, next) {
 var server = app.listen(port, function () {
     // Setup the server / start listening on configured IP & Port.
 
-    logger.info('InfoDisplay app listening at http://' + server.address().address + ":" + server.address().port);
+    logger.info('InfoDisplay app listening on port:' + server.address().port);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
