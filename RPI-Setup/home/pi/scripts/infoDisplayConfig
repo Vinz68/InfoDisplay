@@ -4,6 +4,9 @@ jpg_folder=/var/powerpoint_samba
 # tag to use for logging into syslog:
 tag=InfoDisplay
 
+# detect and start 'node InfoDisplay.js'
+detectAndStartInfoDisplay=false
+
 # log function 
 function log {
 	/usr/bin/logger -t $tag $1 

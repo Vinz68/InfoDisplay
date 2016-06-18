@@ -8,7 +8,7 @@ sleep 20s
 # Startup web-browser "iceweasel" when it is not running; and use a default startup-page.
 if [ -z "$(pgrep iceweasel)" ];
    then (sudo -u pi iceweasel --profile ~/.config http://localhost/index.html --display=:0) &
-   sleep 10s;			# allow browser to startup
+   sleep 15s;			# allow browser to startup
    xte "key F11" -x:0;		# simulate F-11 to go full-screen
 fi
 
