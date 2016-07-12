@@ -5,7 +5,7 @@
 // On Add FileEvent (=new file detected)
 //                   copy the JPG files to a "imageDirectory"
 //                   and generate HTML pages
-//        TODO===>   and generate slides.json file which holds the number of HTML-pages.
+//                   and generate slides.json file which holds the number of HTML-pages.
 // 2016-05-30 Vincent van Beek
 //-----------------------------------------------------------------------------------------------------
 
@@ -207,14 +207,14 @@ function updateSlidesJson() {
             /*
                 "title": "Cerner Information - Slide0",
                 "type": "webpage",
-                "interval": 5000,
+                "interval": 7500,
                 "url": "http://powerpointpi/Slide0.JPG.html"
             */
 
             slidesObj['pages'].push({
                 "title": "Cerner Info - " + path.basename(newSlidesArray[x], '.JPG'),
                 "type": "webpage",
-                "interval": 5000,
+                "interval": 7500,
                 "url": "http://"+ config.hostnameFQDN + "/" + path.basename(newSlidesArray[x]) + ".html"
             });
         }
@@ -305,9 +305,5 @@ module.exports = {
     displayPath: getPath,
     getSlides: getSlides,
 };
-
-
-
-
 
 
