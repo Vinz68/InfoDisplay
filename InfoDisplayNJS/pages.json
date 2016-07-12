@@ -2,16 +2,22 @@
   "timestamp": "2016-06-16T11:13:48Z",
   "pages": [
     {
-      "title": "Weer - Buienradar",
+      "title": "Weather - Buienradar",
       "type": "webpage",
       "interval": 15000,
       "url": "http://infoDisplay.cerner.com/weer.html"
     },
     {
-      "title": "Verkeer - BingMap",
+      "title": "Traffic - BingMap",
       "type": "webpage",
       "interval": 10000,
       "url": "http://infoDisplay.cerner.com/verkeer.html"
+    },
+    {
+      "title": "News - nu.nl",
+      "type": "webpage",
+      "interval": 10000,
+      "url": "http://nu.nl"
     }
 
   ]

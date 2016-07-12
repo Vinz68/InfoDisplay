@@ -79,11 +79,15 @@ function showTitle(flag) {
         var title_info2 = "<h2 class='text-center'>– InfoDisplay –</h2>";
         $(title_info2).appendTo("#title_info");
 
+        $("#pages_data").show();
+
         titleShowing = true;
     }
     else if (flag == false)
     {
         $("#title_info").empty();
+
+        $("#pages_data").hide();
         titleShowing = false;
     }
 }

@@ -14,7 +14,7 @@ Hardware needs
 
 Installation
 - Install Rapbian Jessie (with GUI)
-- Install WebBrower (FireFox ??)
+- Install WebBrower (icewesel)
 - Tight VNC
 - SSH
 - Install node
@@ -22,10 +22,10 @@ Installation
 #### Scripts
 
 - Browser full screen
-- Start Node
-- ...
+- Start Node _ InfoDisplay.js
+- Screen (on/off)...
 
-```sh
+
 node infodisplay.js
 ```
 
