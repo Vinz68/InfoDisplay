@@ -1,23 +1,35 @@
 {
-  "timestamp": "2016-05-31T15:34:48Z",
-  "pages": [
-    {
-      "title": "Cerner Information - Slide0",
-      "type": "webpage",
-      "interval": 5000,
-      "url": "http://powerpointpi/Slide0.JPG.html"
-    },
-    {
-      "title": "Cerner Information - Slide1",
-      "type": "webpage",
-      "interval": 5000,
-      "url": "http://powerpointpi/Slide1.JPG.html"
-    },
-    {
-      "title": "Cerner Information - Slide2",
-      "type": "webpage",
-      "interval": 5000,
-      "url": "http://powerpointpi/Slide2.JPG.html"
-    }
-  ]
+    "timestamp": "2016-07-12 18:21:13",
+    "pages": [
+        {
+            "title": "Cerner Info - Slide1",
+            "type": "webpage",
+            "interval": 5000,
+            "url": "http://infodisplay.cerner.com/Slide1.JPG.html"
+        },
+        {
+            "title": "Cerner Info - Slide2",
+            "type": "webpage",
+            "interval": 10000,
+            "url": "http://infodisplay.cerner.com/Slide2.JPG.html"
+        },
+        {
+            "title": "Cerner Info - Slide3",
+            "type": "webpage",
+            "interval": 5000,
+            "url": "http://infodisplay.cerner.com/Slide3.JPG.html"
+        },
+        {
+            "title": "Cerner Info - Slide4",
+            "type": "webpage",
+            "interval": 10000,
+            "url": "http://infodisplay.cerner.com/Slide4.JPG.html"
+        },
+        {
+            "title": "Cerner Info - Slide5",
+            "type": "webpage",
+            "interval": 10000,
+            "url": "http://infodisplay.cerner.com/Slide5.JPG.html"
+        }
+    ]
 }

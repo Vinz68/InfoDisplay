@@ -168,6 +168,7 @@ function generateHtmlFile(element, index, array) {
     var fileName = element;
 
     // Move the file from the Samba Share to the "html/images" folder.
+    logger.info('move file: ' + fileName + ' to: ' + config.imageDirectory + path.basename(fileName));
     move(fileName, config.imageDirectory + path.basename(fileName), function (err) {
 
         // If an error occurred, handle it (throw, propagate, etc)
@@ -207,20 +208,22 @@ function updateSlidesJson() {
             /*
                 "title": "Cerner Information - Slide0",
                 "type": "webpage",
-                "interval": 7500,
+                "interval": 10000,
                 "url": "http://powerpointpi/Slide0.JPG.html"
             */
 
             slidesObj['pages'].push({
                 "title": "Cerner Info - " + path.basename(newSlidesArray[x], '.JPG'),
                 "type": "webpage",
-                "interval": 7500,
+                "interval": 10000,
                 "url": "http://"+ config.hostnameFQDN + "/" + path.basename(newSlidesArray[x]) + ".html"
             });
         }
+		
+		/* Clear the newSlides Array */
+		newSlidesArray = [];  
 
         // Show new JSON structure in Log file
-        // TODO: Sort the array ??   => Slide0---Slidex (since processing files will not be alphabetic)
         logger.info('/slides =>' + JSON.stringify(slidesObj, null, 4));
 
         // Save JSON (slidesObj) to disk (slides.json)
