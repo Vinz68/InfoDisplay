@@ -13,8 +13,8 @@ var fs = require('fs');                     // We will use the native file syste
 var log4js = require('log4js'); 			// Logger module to log into files
 var config = require('./config.json');      // The configuration of this module.
 var os = require('os');                     // OS specific info
-var slidesHandler = require('./modules/newSlidesHandler.js');   //  Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
-var newsHandler = require('./modules/newsHandler.js');
+var slidesHandler = require('./modules/slides/newSlidesHandler.js');   //  Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
+var newsHandler   = require('./modules/news/newsHandler.js');
 
 var app = express();                        // W're using Express
 var port = 80;                              // Node will listen on port number...
@@ -23,11 +23,11 @@ var hostname = 'localhost';                 // our hostname
 var pagesList = [];	                        // Array with pages (URLs and settings) to be shown by the client browser in a slide show.
 
 
-
 //------------------------------------------------------------------------------------------------------
-// Setup logging
-log4js.loadAppender('file');
-log4js.addAppender(log4js.appenders.file('logs/infoDisplay.log'), 'InfoDisplay');
+// Setup logging; from config.log4js (config.json):
+log4js.configure(config.log4js);
+//log4js.loadAppender('file');
+//log4js.addAppender(log4js.appenders.file('logs/infoDisplay.log'), 'InfoDisplay');
 var logger = log4js.getLogger('InfoDisplay');
 // logger.setLevel('ERROR');   // All log items of level ERROR and higher will be saved in the file
 
@@ -58,7 +58,7 @@ logger.info('/pages =>' + JSON.stringify(pagesList, null, 4));
 
 //--------------------------------------------------------------------------------------------------------
 
-// static link the "www-root" folder to http://hostname/info
+// static link the "www-root" folder
 app.use('/', express.static('html'));
 logger.info('Mapped html subfolder to http://'+ os.hostname() );
 
@@ -92,14 +92,42 @@ app.get('/pages', function (req, res, next) {
 app.get('/news',function(req,res){
 	try{
 		logger.info('NEWS start: ');
-		res.writeHead(200, {'Content-Type': 'text/html'});
-		res.write(newsHandler.getIndex());
-		res.end();
+		var html = newsHandler.getIndexHTML();
+		
+		if (html) {
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			res.write(html);
+			res.end();
+		} else {
+			res.status(503, 'Unable to retrieve index').end();
+		}
 	} catch (err) {
 		logger.error('/news/ : Something went wrong....' , err);
 		res.status(503, 'Something went wrong: ' + err).end();
 	}
 });
+app.get('/news/:source/items', function(req, res) {
+	try {
+		var source = req.params.source;
+		logger.info('app.get: /news/' + source + '/items');
+		
+		var items = newsHandler.getNewsItems(source);
+		if (items) {
+			res.json(items);
+			res.end();  
+		} else {
+			res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+			res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+			res.setHeader("Expires", "0"); // Proxies.
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			res.write("<html><body><p>News items not (yet?) loaded for source: " + source + "</p></body></html>");
+			res.end();  
+		}
+	} catch (err) {
+		logger.error('/news/:source/items : Something went wrong....' , err);
+		res.status(503, 'Something went wrong: ' + err).end();		
+	}
+}); 
 app.get('/news/:source', function(req, res) {
 	try {
 		var source = req.params.source;
@@ -114,7 +142,7 @@ app.get('/news/:source', function(req, res) {
 			res.write(html);
 			res.end();  
 		} else {
-			res.status(404, 'News source not found ort not yet cached (' + source + ')').end();
+			res.status(404, 'News source not found or not yet cached (' + source + ')').end();
 		}
 	} catch (err) {
 		logger.error('/news/:source : Something went wrong....' , err);
