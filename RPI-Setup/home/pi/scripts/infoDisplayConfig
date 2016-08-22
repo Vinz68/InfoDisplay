@@ -5,7 +5,7 @@ jpg_folder=/var/powerpoint_samba
 tag=InfoDisplay
 
 # detect and start 'node InfoDisplay.js'
-detectAndStartInfoDisplay=false
+#detectAndStartInfoDisplay=true
 
 # log function 
 function log {

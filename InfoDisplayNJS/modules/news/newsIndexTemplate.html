@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="refresh" content="120">
+		<title>Nieuws Index</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />		
+		<style>
+			/* style.css */
+			* 				{
+								font-size: 20px;
+								line-height: 1;
+			}
+			h4 				{ 
+								margin-top: 0px; 
+								margin-bottom: 4px;
+							}
+			.no-left-pad 	{ 
+								padding-left: 0px; 
+							}
+			.verysmall		{
+								font-size: 10px;
+								margin-bottom: 0px;
+							}
+			img				{
+								//max-height: 75px;
+								max-height: 80px;
+							}
+			.panel			{
+								margin-bottom: 5px;
+							}
+			.panel-body		{
+								padding: 10px;
+								padding-bottom: 5px;
+							}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<h3>Nieuws Index</h3>
+				{{~it :value:index}}
+					<div class="col-md-6" >
+						<div class="panel panel-info" >
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-12">
+										<a href="/news/{{=value.getKey()}}">{{=value.getTitle()}}</a>
+										<p class="small text-muted">{{=value.getInfo()}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{{~}}
+			</div>
+		</div>
+	</body>
+</html>

@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Weer</title>
-
     <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -17,15 +16,43 @@
     <![endif]-->
 </head>
 <body>
-
     <div class="row">
-        <div class="col-xs-6 col-md-6"><img src="http://www.buienradar.nl/image/?type=weathermap-large&fn=temperatuur.000001.png&extension=png" /></div>
-        <div class="col-xs-6 col-md-6"><img src="http://www.buienradar.nl/image/?type=weathermap-large&fn=wind.000001.png&extension=png" /></div>
-    </div>
+	<div class="col-sm-1"> </div>
+<!--        <div class="col-sm-1">
+		<div class="page-header">
+               	 <h1>Nu</h1>
+            	</div>
+		<IFRAME SRC="http://gratisweerdata.buienradar.nl/hetweer.php" NORESIZE SCROLLING=NO HSPACE=0 VSPACE=0 FRAMEBORDER=0 MARGINHEIGHT=0 MARGINWIDTH=0 WIDTH=150 HEIGHT=140></IFRAME>	
+	</div>
+-->
+        <div class="col-sm-5">
+            <div class="page-header">
+                <h1>Weersverwachting</h1>
+            </div>
+       		<a href="http://www.accuweather.com/en/nl/the-hague/251687/weather-forecast/251687" class="aw-widget-legal">
+			<!--
+			By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at http://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at http://www.accuweather.com/en/privacy.
+			-->
+			</a><div id="awtd1470640751871" class="aw-widget-36hour"  data-locationkey="251687" data-unit="c" data-language="nl" data-useip="false" data-uid="awtd1470640751871" data-editlocation="false"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
+		</div>
+        <div class="col-sm-5">
+            <div class="page-header">
+                <h1>Buienradar <small>Komende 3 uur</small></h1>
+            </div>
+			<img style="-webkit-user-select: none; width: 650px; height: 612px;" src="http://api.buienradar.nl/image/1.0/RadarMapNL?w=700&amp;h=765">
+			<!-- do not use the one below: the zooming works only for the background, not for the clouds....
+            <iframe id="buienradarframe" src="http://www.buienradar.nl/lokalebuienradar/?lat=52.07667&lng=4.29861&overname=2&zoom=6&naam=den haag&size=3&voor=1" scrolling=no width=650 height=612 frameborder=no style="transform: scale(1.51); transform-origin: 0 0;" ></iframe>
+			-->
+        </div>
 
+        <div class="col-sm-3"></div>
+
+        <div class="col-sm-2"></div>
+
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="Scripts/jquery-2.2.3.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
 </body>
 </html>

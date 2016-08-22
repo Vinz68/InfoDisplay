@@ -14,6 +14,7 @@ var log4js = require('log4js'); 			// Logger module to log into files
 var config = require('./config.json');      // The configuration of this module.
 var os = require('os');                     // OS specific info
 var slidesHandler = require('./modules/newSlidesHandler.js');   //  Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
+var newsHandler = require('./modules/newsHandler.js');
 
 var app = express();                        // W're using Express
 var port = 80;                              // Node will listen on port number...
@@ -40,6 +41,9 @@ logger.info('Starting InfoDisplay...');
 //------------------------------------------------------------------------------------------------------
 // Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
 slidesHandler.init();
+// Initialize news handler
+newsHandler.init();
+
 
 // Show in logfile what to expect on a app.get- /slides 
 logger.info('/slides =>' + JSON.stringify(slidesHandler.getSlides(), null, 4));
@@ -83,6 +87,40 @@ app.get('/pages', function (req, res, next) {
     res.contentType('application/json');
     res.send(JSON.stringify(pagesList, null, 4));
 });
+
+
+app.get('/news',function(req,res){
+	try{
+		logger.info('NEWS start: ');
+		res.writeHead(200, {'Content-Type': 'text/html'});
+		res.write(newsHandler.getIndex());
+		res.end();
+	} catch (err) {
+		logger.error('/news/ : Something went wrong....' , err);
+		res.status(503, 'Something went wrong: ' + err).end();
+	}
+});
+app.get('/news/:source', function(req, res) {
+	try {
+		var source = req.params.source;
+		logger.info('app.get: /news/' + source);
+		
+		var html = newsHandler.getNews(source);
+		if (html) {
+			res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+			res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+			res.setHeader("Expires", "0"); // Proxies.
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			res.write(html);
+			res.end();  
+		} else {
+			res.status(404, 'News source not found ort not yet cached (' + source + ')').end();
+		}
+	} catch (err) {
+		logger.error('/news/:source : Something went wrong....' , err);
+		res.status(503, 'Something went wrong: ' + err).end();		
+	}
+}); 
 
 
 var server = app.listen(port, function () {

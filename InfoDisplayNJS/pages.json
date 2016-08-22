@@ -4,21 +4,38 @@
     {
       "title": "Weather - Buienradar",
       "type": "webpage",
-      "interval": 15000,
+      "interval": 20000,
       "url": "http://infoDisplay.cerner.com/weer.html"
     },
     {
       "title": "Traffic - BingMap",
       "type": "webpage",
-      "interval": 10000,
+      "interval": 20000,
       "url": "http://infoDisplay.cerner.com/verkeer.html"
     },
+	{
+	  "title": "Algemeen",
+	  "type": "webpage",
+	  "interval": 20000,
+	  "url": "http://infodisplay.cerner.com/news/Nieuws_NL_BE"
+	},
     {
-      "title": "News - nu.nl",
+      "title": "Gezondheid (NL)",
       "type": "webpage",
-      "interval": 10000,
-      "url": "http://nu.nl"
+      "interval": 20000,
+      "url": "http://infodisplay.cerner.com/news/GezondheidNews_NL"
+    },
+	{
+      "title": "Gezondheid (BE)",
+      "type": "webpage",
+      "interval": 20000,
+      "url": "http://infodisplay.cerner.com/news/GezondheidNews_BE"
+    },
+	{
+      "title": "Den Haag",
+      "type": "webpage",
+      "interval": 20000,
+      "url": "http://infodisplay.cerner.com/news/ADDenHaag_NL"
     }
-
   ]
 }

@@ -2,5 +2,20 @@
   "numberOfImages": "4",
   "filePrefix": "Slide",
   "filePostfix": ".JPG",
-  "src": "./images/"
+  "src": "./images/",
+  "log4js": {
+		"appenders": [
+			{
+				"type": "file",
+				"filename": "logs/infoDisplay.log",
+				"maxLogSize": 2048000,
+				"backups": 2
+			}
+		],
+		"levels": {
+			"[all]": "WARN",
+			"InfoDisplay": "WARN"
+		},
+		"replaceConsole": false
+	}
 }

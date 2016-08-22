@@ -1,0 +1,268 @@
+{
+	"sources": [
+			
+			{
+				"key": "DeStandaard_BE",
+				"title": "standaard.be",
+				"type": "rss",
+				"url": "http://www.standaard.be/rss/section/1f2838d4-99ea-49f0-9102-138784c7ea7c"
+			},
+			{
+				"key": "HLN_BE",
+				"title": "hln.be",
+				"type": "rss",
+				"url": "http://www.hln.be/rss.xml"
+			},
+			{
+				"key": "Gezondheid_BE",
+				"title": "gezondheid.be",
+				"type": "rss",
+				"url": "http://www.gezondheid.be/rss/feeds/news.xml"
+			},
+			{
+				"key": "KCE_BE",
+				"title": "kce.fgov.be",
+				"type": "rss",
+				"url": "https://kce.fgov.be/nl/rss/press-releases",
+				"ignoreNoPubDate": true,
+				"fieldmapping": {
+					"image":  {"source": "description", "regex": "^(.|\\r|\\n)*<img src=\"(.*)\" alt(.|\\r|\\n)*$", "replace": "$2" },
+					"description":  {"source": "description", "regex": "^(.|\\r|\\n)*<\/a><p>((.|\\r|\\n)*)<\/p>(.|\\r|\\n)*$", "replace": "$2" }
+				}
+			},
+			{
+				"key": "KnackGezondheid_BE",
+				"title": "knack.be",
+				"type": "rss",
+				"url": "http://www.knack.be/nieuws/gezondheid/feed.rss",
+				"ignoreNoPubDate": true,
+				"fieldmapping": {
+					"image":  {"source": "description", "regex": "(.|\\n|\\r)*<img src=\"(.*)\" (.|\\n|\\r)*", "replace": "$2" }
+				}
+			},
+			{
+				"key": "egezondheid_BE",
+				"title": "e-gezondheid.be",
+				"type": "rss",
+				"url": "http://www.e-gezondheid.be/rss/contenu/actueel",
+				"ignoreNoPubDate": true,
+				"fieldmapping": {
+					"image":  	{"source": "description", "regex": "(.|\\n|\\r)*<img src=\"(.*)\" (.|\\n|\\r)*", "replace": "$2" },
+					"datetime": {"source": "datetime", "regex": "(.*) Europe.*", "replace": "$1"}
+				}
+			},
+			{
+				"key": "ZorgEnGezondheid_BE",
+				"title": "zorg-en-gezondheid.be",
+				"type": "rss",
+				"url": "https://www.zorg-en-gezondheid.be/zorg-en-gezondheid/rss.xml",
+				"ignoreNoPubDate": true
+			},
+			{
+				"key": "NU_NL",
+				"title": "nu.nl",
+				"type": "rss",
+				"url": "http://www.nu.nl/rss/"
+			},
+			{
+				"key": "ADDenHaag_NL",
+				"title": "AD: Den Haag",
+				"type": "rss",
+				"url": "http://www.ad.nl/den-haag/rss.xml"
+			},
+			{
+				"key": "Gezondheidsraad_NL",
+				"title": "gezondheidsraad.nl",
+				"type": "rss",
+				"url": "https://www.gezondheidsraad.nl/nl/nieuws/feed",
+				"fieldmapping": {
+					"description":  {"source": "description", "regex": "(.*)<p class=\"field-field_intro\">(.*?)\\s*<\\/p>(.*)", "replace": "$2" },
+					"image":  {"source": "description", "regex": "(.*)<img src=\"(.*)\" width=\"\\d+\" height=\"\\d+\"(.*)", "replace": "$2" }
+				},
+				"ignoreNoPubDate": true
+			},
+			{
+				"key": "NUGezondheid_NL",
+				"title": "nu.nl",
+				"type": "rss",
+				"url": "http://www.nu.nl/rss/Gezondheid"
+			},
+			{
+				"key": "igz_NL",
+				"title": "Inspectie Gezondheidszorg",
+				"type": "rss",
+				"url": "http://www.igz.nl/rss.aspx"
+			},
+			{
+				"key": "zorgvisie_NL",
+				"title": "Zorgvisie",
+				"type": "rss",
+				"url": "https://www.zorgvisie.nl/RSS/Rss-Nieuws/",
+				"ignoreNoPubDate": true
+			},
+			{
+				"key": "ggznieuws_NL",
+				"title": "GGZ Nieuws",
+				"type": "rss",
+				"url": "http://www.ggznieuws.nl/home/feed/",
+				"fieldmapping": {
+					"description":  {"source": "description", "regex": "(.|\\n|\\r)+&#8211;\\s+(.*)\\.\\.\\.(\\s?.*)+", "replace": "$2..." },
+					"image":  {"source": "description", "regex": "(.|\\n|\\r)+<img title=\".*\" src=\"(.*)\" alt=(.*)(\\s?.*)+", "replace": "$2" }
+				}
+			},
+			{
+				"key": "GezondheidNews_NL",
+				"title": "GezondheidNews NL",
+				"type": "combine",
+				"feeds": ["Gezondheidsraad_NL", "NUGezondheid_NL", "igz_NL", "zorgvisie_NL", "ggznieuws_NL"], 
+				"sort": true, 
+				"limit1": 30,
+				"limit2": 5
+			},
+			{
+				"key": "GezondheidNews_BE",
+				"title": "GezondheidNews BE",
+				"type": "combine",
+				"feeds": ["Gezondheid_BE", "ZorgEnGezondheid_BE", "KnackGezondheid_BE", "egezondheid_BE"], 
+				"sort": true, 
+				"limit1": 30,
+				"limit2": 5
+			},
+			{
+				"key": "Nieuws_NL_BE",
+				"title": "Nieuws NL en BE",
+				"type": "combine",
+				"feeds": ["DeStandaard_BE", "NU_NL", "HLN_BE"], 
+				"sort": true, 
+				"limit1": 30,
+				"limit2": 10
+			}
+		],
+	"outputs": [
+			{
+				"key": "index",
+				"index": true,
+				"template": "newsIndexTemplate.html",
+				"info": "Index pagina"
+			},
+			{
+				"key": "Nieuws_NL_BE",
+				"title": "Nieuws NL en BE",
+				"input": "Nieuws_NL_BE",
+				"template": "newsTemplate.html",
+				"info": "Laatste nieuws van Nu en De Standaard (nu.nl en standaard.be)."
+			},
+			{
+				"key": "GezondheidNews_NL",
+				"title": "Gezondheid NL",
+				"input": "GezondheidNews_NL",
+				"template": "newsTemplate.html",
+				"info": "Actueel gezondheidsnieuws uit Nederland. Bronnen zijn Nu Gezondheid, Gezondheidsraad, Inspectie Gezondheidszorg, Zorgvisie en GGZ"
+			},
+			{
+				"key": "GezondheidNews_BE",
+				"title": "Gezondheid BE",
+				"input": "GezondheidNews_BE",
+				"template": "newsTemplate.html",
+				"info": "Actueel gezondheidsnieuws uit België.<br/>Bronnen zijn gezondheid.be, knack, e-gezondheid, Zorg en Gezondheid."
+			},
+			{
+				"key": "NU_NL",
+				"title": "NU: Laatste nieuws",
+				"input": "NU_NL",
+				"template": "newsTemplate.html",
+				"info": "Laatste nieuws van NU (nu.nl)."
+			},
+			{
+				"key": "ADDenHaag_NL",
+				"title": "AD - Den Haag",
+				"input": "ADDenHaag_NL",
+				"template": "newsTemplate.html",
+				"info": "Nieuws uit Den Haag"
+			},
+			{
+				"key": "DeStandaard_BE",
+				"title": "standaard.be",
+				"input": "DeStandaard_BE",
+				"template": "newsTemplate.html",
+				"info": "Laatste nieuws van De Standaard (www.destandaard.be)"
+			},
+			{
+				"key": "HLN_BE",
+				"title": "hln.be",
+				"input": "HLN_BE",
+				"template": "newsTemplate.html",
+				"info": "24 uur nieuws en sport van HLN (hln.be)"
+			},
+			{
+				"key": "NUGezondheid_NL",
+				"title": "NU: Gezondheid",
+				"input": "NUGezondheid_NL",
+				"template": "newsTemplate.html",
+				"info": "Gezondheids nieuws verzorgd door NU (nu.nl)."
+			},
+			{
+				"key": "Gezondheidsraad_NL",
+				"title": "Gezondheidsraad NL",
+				"input": "Gezondheidsraad_NL",
+				"template": "newsTemplate.html",
+				"info": "Nieuws van de Gezondheidsraad: Onafhankelijk wetenschappelijk adviesorgaan voor regering en parlement."
+			},
+			{
+				"key": "igz_NL",
+				"title": "Inspectie Gezondheidszorg NL",
+				"input": "igz_NL",
+				"template": "newsTemplate.html",
+				"info": "Inspectie van de Gezondheidszorg."
+			},
+			{
+				"key": "zorgvisie_NL",
+				"title": "Zorgvisie NL",
+				"input": "zorgvisie_NL",
+				"template": "newsTemplate.html",
+				"info": "Zorgvisie: de brug tussen beleid en praktijk."
+			},
+			{
+				"key": "ggznieuws_NL",
+				"title": "GGZ Nieuws NL",
+				"input": "ggznieuws_NL",
+				"template": "newsTemplate.html",
+				"info": "Nieuws uit de Geestelijke gezondheidszorg (ggznieuws.nl)."
+			},
+			{
+				"key": "Gezondheid_BE",
+				"title": "Gezondheid BE",
+				"input": "Gezondheid_BE",
+				"template": "newsTemplate.html",
+				"info": "Nieuwsberichten van gezondheid.be."
+			},	
+			{
+				"key": "KnackGezondheid_BE",
+				"title": "KnackGezondheid_BE",
+				"input": "KnackGezondheid_BE",
+				"template": "newsTemplate.html",
+				"info": "Gezondheid op knack.be."
+			},
+			{
+				"key": "egezondheid_BE",
+				"title": "e-gezondheid.be",
+				"input": "egezondheid_BE",
+				"template": "newsTemplate.html",
+				"info": "Gezondheid op e-gezondheid.be."
+			},
+			{
+				"key": "ZorgEnGezondheid_BE",
+				"title": "Zorg-en-Gezondheid.be",
+				"input": "ZorgEnGezondheid_BE",
+				"template": "newsTemplate.html",
+				"info": "Nieuws van Zorg en Gezondheid (zorg-en-gezondheid.be)."
+			},		
+			{
+				"key": "KCE_BE",
+				"title": "kce.fgov.be",
+				"input": "KCE_BE",
+				"template": "newsTemplate.html",
+				"info": "Publicaties van het Federaal Kenniscentrum voor de Gezondheidszorg (kce.fgov.be)."
+			}
+		]
+}

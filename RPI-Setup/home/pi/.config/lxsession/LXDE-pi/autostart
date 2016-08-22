@@ -4,6 +4,11 @@
 #---------------------------------------------------------------------------------
 # Startup in kiosk mode with internet browser fullscreen and screensaver disabled.
 #---------------------------------------------------------------------------------
+# Disable screensaver
+@xset s noblank 
+@xset s off 
+@xset -dpms
+
 
 # Startup InfoDisplay (Node-JS program, which serves as web-server)
 @/home/pi/scripts/infoDisplayStart.sh
@@ -11,11 +16,5 @@
 # Internet browser full screen, showing InfoDisplay
 @/home/pi/scripts/infoDisplayStartBrowser.sh
 
-
-# Disable screensaver
-@xset s noblank 
-@xset s off 
-@xset -dpms
-
-#@xscreensaver mode off
+@xscreensaver mode off
 
