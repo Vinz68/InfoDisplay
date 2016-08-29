@@ -10,11 +10,8 @@
 //-----------------------------------------------------------------------------------------------------
 var express = require('express');           // Express web application framework. http://expressjs.com/ 
 var fs = require('fs');                     // We will use the native file system
-var log4js = require('log4js'); 			// Logger module to log into files
-var config = require('./config.json');      // The configuration of this module.
 var os = require('os');                     // OS specific info
-var slidesHandler = require('./modules/slides/newSlidesHandler.js');   //  Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
-var newsHandler   = require('./modules/news/newsHandler.js');
+var config = require('./infoDisplayConfig.json'); 	// Configuration file of this module which includes Logger configuration (log4js)
 
 var app = express();                        // W're using Express
 var port = 80;                              // Node will listen on port number...
@@ -24,14 +21,11 @@ var pagesList = [];	                        // Array with pages (URLs and settin
 
 
 //------------------------------------------------------------------------------------------------------
-// Setup logging; from config.log4js (config.json):
+// Setup & Configure logging; from config.file
+var log4js = require('log4js'); 			// Logger module to log into files
 log4js.configure(config.log4js);
-//log4js.loadAppender('file');
-//log4js.addAppender(log4js.appenders.file('logs/infoDisplay.log'), 'InfoDisplay');
-var logger = log4js.getLogger('InfoDisplay');
-// logger.setLevel('ERROR');   // All log items of level ERROR and higher will be saved in the file
+var logger = log4js.getLogger("infoDisplay");
 
-// future do: log4js.configure('my_log4js_configuration.json', { reloadSecs: 300 });
 // see: https://github.com/nomiddlename/log4js-example/blob/master/app.js
 
 // Log that w're starting
@@ -40,6 +34,10 @@ logger.info('Starting InfoDisplay...');
 
 //------------------------------------------------------------------------------------------------------
 // Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
+
+var slidesHandler = require('./modules/slides/newSlidesHandler.js');   //  Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
+var newsHandler = require('./modules/news/newsHandler.js');
+
 slidesHandler.init();
 // Initialize news handler
 newsHandler.init();

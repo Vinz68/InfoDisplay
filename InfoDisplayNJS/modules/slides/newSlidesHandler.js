@@ -11,19 +11,11 @@
 
 var fs = require('fs');                     // We will use the native file system
 var chokidar = require('chokidar');			// Used to watch a folder or file; see https://github.com/paulmillr/chokidar
-var log4js = require('log4js'); 			// Logger module, used to log into files
 var path = require('path');                 // Directory and file operations 
-var config = require('./newSlidesHandler.json');      // The (persitent) information of the slides (html pages) 
+var config = require('./newSlidesHandlerConfig.json');      // The configuration file for this module 
 
-//var child_process = require("child_process");   // Used to execute native shell commands.
-//var hostnameFQDN;
 
-// TODO: set this in a newSlidesHandler.json config file
-//var slidesDirectory = '/var/powerpoint_samba/*.JPG';
-//var imageDirectory = '/home/pi/InfoDisplay/html/images/';
-//var htmlDirectory = '/home/pi/InfoDisplay/html/';
-
-var slidesFile = "./modules/slides.json";   // The (persitent) information of the slides (html pages) in JSON format.
+var slidesFile = "./modules/slides/slides.json";           // The (persitent) information of the slides (html pages) in JSON format.
 var slidesObj;                              // Javascript object, which holds the JSON slidesFile
 var newSlidesArray = [];                    // Array with new (incomming) slides (JPG images)
 var processingNewSlides = false;            // Flag which indicates that we are busy processing a new (batch) of slides.
@@ -31,15 +23,12 @@ var processingNewSlides = false;            // Flag which indicates that we are 
 var timerId = 0;                            // delay timer id
 var timerDelay = 10000;                     // xx seconds delay to process new incoming files from the samba share.
 
-
 //------------------------------------------------------------------------------------------------------
-// Setup logging
-log4js.loadAppender('file');
-log4js.addAppender(log4js.appenders.file('logs/infoDisplay.log'), 'NewSlidesHandler');
-var logger = log4js.getLogger('NewSlidesHandler');
+// Setup & Configure logging; from config.file
+var log4js = require('log4js'); 			// Logger module to log into files
+log4js.configure(config.log4js);
+var logger = log4js.getLogger("NewSlidesHandler");
 
-// Log that w're starting
-logger.info('Starting NewSlidesHandler...');
 //------------------------------------------------------------------------------------------------------
 
 
@@ -51,13 +40,23 @@ function init() {
         logger.info('init: Starting...');
 
         // Check that slidesDirectory (path) exists
-        fs.accessSync(dirname, fs.F_OK);
+        fs.accessSync(dirname, fs.R_OK);
         logger.info('init: SlidesDirectory: ' + dirname + ' is accessable');
+    } catch (e) {
+        logger.error('init: SlidesDirectory: ' + dirname + ' is NOT accessable');
+        logger.error('init: Error: ' + e);
+    }
 
+    try {
         // read the last generated file which hold the current set of Slides (html pages with powerpoint JPG images).
-        logger.info( 'init: Read and parse JSON file: ' + slidesFile + ' ....');
+        logger.info( 'init: Read and parse JSON file: ' + slidesFile + ' ...');
         slidesObj = JSON.parse(fs.readFileSync(slidesFile, 'utf8'));
+    } catch (e) {
+        logger.error('init: Read and pars : ' + slidesFile + ' has failed.');
+        logger.error('init: Error: ' + e);
+    }
 
+    try {
         // Set a file watcher on the "slidesDirectory"
         watchForNewSlides(config.slidesDirectory);
 
@@ -65,7 +64,7 @@ function init() {
 
     } catch (e) {
         // It isn't accessible
-        logger.error('init: SlidesDirectory: ' + dirname + ' is NOT accessable');
+        logger.error('init: Setup file watcher in directory: '+ config.slidesDirectory + ' has failed.');
         logger.error('init: Error: ' + e);
     }
 }

@@ -1,0 +1,23 @@
+﻿{
+  "hostnameFQDN": "infodisplay.cerner.com",
+  "slidesDirectory": "/var/powerpoint_samba/infoDisplay/*.JPG",
+  "imageDirectory": "/home/pi/InfoDisplay/html/images/",
+  "htmlDirectory": "/home/pi/InfoDisplay/html/",
+
+  "log4js": {
+    "appenders": [
+      {
+        "type": "file",
+        "filename": "logs/infoDisplay.log",
+        "maxLogSize": 2048000,
+        "backups": 3
+      }
+    ],
+    "levels": {
+      "[all]": "WARN",
+      "NewSlidesHandler": "WARN"
+    },
+    "replaceConsole": false
+  }
+
+}

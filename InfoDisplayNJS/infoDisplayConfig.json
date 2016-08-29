@@ -1,0 +1,17 @@
+{
+  "log4js": {
+		"appenders": [
+			{
+				"type": "file",
+				"filename": "logs/infoDisplay.log",
+				"maxLogSize": 2048000,
+				"backups": 3
+			}
+		],
+    "levels": {
+      "[all]": "WARN", 
+      "InfoDisplay": "INFO"
+    },
+		"replaceConsole": false
+	}
+}

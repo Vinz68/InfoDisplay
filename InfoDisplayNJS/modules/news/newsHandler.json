@@ -6,20 +6,20 @@
 	"refreshDelayOutput": 30000,
 	"log4js": {
 		"appenders": [
-			{
-				"type": "file",
-				"filename": "logs/infoDisplay.log",
-				"maxLogSize": 2048000,
-				"backups": 2
-			}
+      {
+        "type": "file",
+        "filename": "logs/infoDisplay.log",
+        "maxLogSize": 2048000,
+        "backups": 3
+      }
 		],
-		"levels": {
-			"[all]": "WARN",
-			"OutputFeed": "WARN",
-			"CombineReader": "WARN",
-			"FeedReader": "WARN",
-			"NewsHandler": "WARN"
-		},
+    "levels": {
+      "[all]": "WARN",
+      "OutputFeed": "WARN",
+      "CombineReader": "WARN",
+      "FeedReader": "WARN",
+      "NewsHandler": "WARN"
+    },
 		"replaceConsole": false
 	}
 }
