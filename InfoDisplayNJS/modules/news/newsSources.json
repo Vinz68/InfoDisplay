@@ -26,7 +26,7 @@
 				"url": "https://kce.fgov.be/nl/rss/press-releases",
 				"ignoreNoPubDate": true,
 				"fieldmapping": {
-					"image":  {"source": "description", "regex": "^(.|\\r|\\n)*<img src=\"(.*)\" alt(.|\\r|\\n)*$", "replace": "$2" },
+					"image":  {"source": "description", "regex": "^(.|\\r|\\n)*<img src=\"(.*?)\" alt(.|\\r|\\n)*$", "replace": "$2" },
 					"description":  {"source": "description", "regex": "^(.|\\r|\\n)*<\/a><p>((.|\\r|\\n)*)<\/p>(.|\\r|\\n)*$", "replace": "$2" }
 				}
 			},
@@ -37,7 +37,7 @@
 				"url": "http://www.knack.be/nieuws/gezondheid/feed.rss",
 				"ignoreNoPubDate": true,
 				"fieldmapping": {
-					"image":  {"source": "description", "regex": "(.|\\n|\\r)*<img src=\"(.*)\" (.|\\n|\\r)*", "replace": "$2" }
+					"image":  {"source": "description", "regex": "(.|\\n|\\r)*<img src=\"(.*?)\" (.|\\n|\\r)*", "replace": "$2" }
 				}
 			},
 			{
@@ -47,7 +47,7 @@
 				"url": "http://www.e-gezondheid.be/rss/contenu/actueel",
 				"ignoreNoPubDate": true,
 				"fieldmapping": {
-					"image":  	{"source": "description", "regex": "(.|\\n|\\r)*<img src=\"(.*)\" (.|\\n|\\r)*", "replace": "$2" },
+					"image":  	{"source": "description", "regex": "(.|\\n|\\r)*<img src=\"(.*?)\" (.|\\n|\\r)*", "replace": "$2" },
 					"datetime": {"source": "datetime", "regex": "(.*) Europe.*", "replace": "$1"}
 				}
 			},
@@ -77,7 +77,7 @@
 				"url": "https://www.gezondheidsraad.nl/nl/nieuws/feed",
 				"fieldmapping": {
 					"description":  {"source": "description", "regex": "(.*)<p class=\"field-field_intro\">(.*?)\\s*<\\/p>(.*)", "replace": "$2" },
-					"image":  {"source": "description", "regex": "(.*)<img src=\"(.*)\" width=\"\\d+\" height=\"\\d+\"(.*)", "replace": "$2" }
+					"image":  {"source": "description", "regex": "(.*)<img src=\"(.*?)\" width=\"\\d+\" height=\"\\d+\"(.*)", "replace": "$2" }
 				},
 				"ignoreNoPubDate": true
 			},
@@ -107,26 +107,17 @@
 				"url": "http://www.ggznieuws.nl/home/feed/",
 				"fieldmapping": {
 					"description":  {"source": "description", "regex": "(.|\\n|\\r)+&#8211;\\s+(.*)\\.\\.\\.(\\s?.*)+", "replace": "$2..." },
-					"image":  {"source": "description", "regex": "(.|\\n|\\r)+<img title=\".*\" src=\"(.*)\" alt=(.*)(\\s?.*)+", "replace": "$2" }
+					"image":  {"source": "description", "regex": "(.|\\n|\\r)+<img title=\".*\" src=\"(.*?)\" alt=(.*)(\\s?.*)+", "replace": "$2" }
 				}
 			},
 			{
-				"key": "GezondheidNews_NL",
-				"title": "GezondheidNews NL",
+				"key": "GezondheidNews",
+				"title": "GezondheidNews",
 				"type": "combine",
-				"feeds": ["Gezondheidsraad_NL", "NUGezondheid_NL", "igz_NL", "zorgvisie_NL", "ggznieuws_NL"], 
+				"feeds": ["Gezondheidsraad_NL", "NUGezondheid_NL", "igz_NL", "zorgvisie_NL", "ggznieuws_NL","Gezondheid_BE", "ZorgEnGezondheid_BE", "KnackGezondheid_BE", "egezondheid_BE"], 
 				"sort": true, 
-				"limit1": 30,
-				"limit2": 5
-			},
-			{
-				"key": "GezondheidNews_BE",
-				"title": "GezondheidNews BE",
-				"type": "combine",
-				"feeds": ["Gezondheid_BE", "ZorgEnGezondheid_BE", "KnackGezondheid_BE", "egezondheid_BE"], 
-				"sort": true, 
-				"limit1": 30,
-				"limit2": 5
+				"limit1": 50,
+				"limit2": 8
 			},
 			{
 				"key": "Nieuws_NL_BE",
@@ -153,18 +144,11 @@
 				"info": "Laatste nieuws van Nu en De Standaard (nu.nl en standaard.be)."
 			},
 			{
-				"key": "GezondheidNews_NL",
-				"title": "Gezondheid NL",
-				"input": "GezondheidNews_NL",
+				"key": "GezondheidNews",
+				"title": "Gezondheid",
+				"input": "GezondheidNews",
 				"template": "newsTemplate.html",
-				"info": "Actueel gezondheidsnieuws uit Nederland. Bronnen zijn Nu Gezondheid, Gezondheidsraad, Inspectie Gezondheidszorg, Zorgvisie en GGZ"
-			},
-			{
-				"key": "GezondheidNews_BE",
-				"title": "Gezondheid BE",
-				"input": "GezondheidNews_BE",
-				"template": "newsTemplate.html",
-				"info": "Actueel gezondheidsnieuws uit België.<br/>Bronnen zijn gezondheid.be, knack, e-gezondheid, Zorg en Gezondheid."
+				"info": "Actueel gezondheidsnieuws uit België en Nederland.<br/>Bronnen zijn Nu Gezondheid, Gezondheidsraad, Inspectie Gezondheidszorg, Zorgvisie, GGZ, gezondheid.be, knack.be, e-gezondheid.be, Zorg en Gezondheid.be."
 			},
 			{
 				"key": "NU_NL",
