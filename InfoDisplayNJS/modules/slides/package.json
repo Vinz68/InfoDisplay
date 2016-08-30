@@ -1,0 +1,15 @@
+{
+  "name": "slides",
+  "version": "1.0.0",
+  "description": "Monitors a 'slidesDirectory' for new JPG to build HTML-slides and the list of slides in slides.json ",
+  "main": "newSlidesHandler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Vincent van Beek",
+  "license": "ISC",
+  "dependencies": {
+    "log4js": "^0.6.38"
+  }
+}

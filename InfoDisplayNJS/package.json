@@ -1,0 +1,22 @@
+{
+  "name": "InfoDisplay",
+  "version": "1.0.0",
+  "description": "InfoDisplay is a server-side web server for presenting full-screen slides(JPG) and configured web-pages.",
+  "main": "infoDisplay.js",
+  "dependencies": {
+    "chokidar": "^1.4.3",
+    "dot": "^1.0.3",
+    "express": "^4.14.0",
+    "log4js": "^0.6.38",
+    "onoff": "^1.0.4",
+    "request": "^2.74.0",
+    "xml-js": "^0.9.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Vincent van Beek & Michiel Janssen",
+  "license": "ISC"
+}
