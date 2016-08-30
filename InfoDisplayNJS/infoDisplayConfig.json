@@ -4,13 +4,17 @@
 			{
 				"type": "file",
 				"filename": "logs/infoDisplay.log",
-				"maxLogSize": 2048000,
+				"maxLogSize": 20000000,
 				"backups": 3
 			}
 		],
     "levels": {
-      "[all]": "WARN", 
-      "InfoDisplay": "INFO"
+      "InfoDisplay": "INFO",
+      "NewSlidesHandler": "WARN",
+      "OutputFeed": "WARN",
+      "CombineReader": "WARN",
+      "FeedReader": "WARN",
+      "NewsHandler": "WARN"
     },
 		"replaceConsole": false
 	}

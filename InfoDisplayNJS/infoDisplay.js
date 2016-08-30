@@ -34,24 +34,24 @@ logger.info('Starting InfoDisplay...');
 
 //------------------------------------------------------------------------------------------------------
 // Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
-
 var slidesHandler = require('./modules/slides/newSlidesHandler.js');   //  Monitors a local samba share on new PPT-slides (JPGs) and create a html page for each slide
-var newsHandler = require('./modules/news/newsHandler.js');
-
 slidesHandler.init();
+
+//-------------------------------------------------------------------------------------------------------
 // Initialize news handler
+var newsHandler = require('./modules/news/newsHandler.js');
 newsHandler.init();
 
 
 // Show in logfile what to expect on a app.get- /slides 
-logger.info('/slides =>' + JSON.stringify(slidesHandler.getSlides(), null, 4));
+logger.debug('/slides =>' + JSON.stringify(slidesHandler.getSlides(), null, 4));
 
 
 //-------------------------------------------------------------------------------------------------------
 // Load list of configured web-pages and its settings.
-logger.info('Load configured pages (pages.json)');
+logger.debug('Load configured pages (pages.json)');
 pagesList = JSON.parse(fs.readFileSync('./pages.json', 'utf8'));
-logger.info('/pages =>' + JSON.stringify(pagesList, null, 4));
+logger.debug('/pages =>' + JSON.stringify(pagesList, null, 4));
 
 
 //--------------------------------------------------------------------------------------------------------
@@ -104,6 +104,8 @@ app.get('/news',function(req,res){
 		res.status(503, 'Something went wrong: ' + err).end();
 	}
 });
+
+
 app.get('/news/:source/items', function(req, res) {
 	try {
 		var source = req.params.source;
@@ -125,7 +127,9 @@ app.get('/news/:source/items', function(req, res) {
 		logger.error('/news/:source/items : Something went wrong....' , err);
 		res.status(503, 'Something went wrong: ' + err).end();		
 	}
-}); 
+});
+
+
 app.get('/news/:source', function(req, res) {
 	try {
 		var source = req.params.source;

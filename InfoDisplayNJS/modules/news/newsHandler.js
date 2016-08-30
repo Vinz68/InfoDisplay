@@ -9,7 +9,7 @@ var dot = require('dot');
 var config = require('./newsHandler.json');
 
 var log4js = require('log4js');
-log4js.configure(config.log4js);
+//log4js.configure(config.log4js);
 
 const RSS_READER_TYPE			= 'rss';
 const COMBINE_READER_TYPE		= 'combine';

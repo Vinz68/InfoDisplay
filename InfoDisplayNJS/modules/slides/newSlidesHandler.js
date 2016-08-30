@@ -26,7 +26,7 @@ var timerDelay = 10000;                     // xx seconds delay to process new i
 //------------------------------------------------------------------------------------------------------
 // Setup & Configure logging; from config.file
 var log4js = require('log4js'); 			// Logger module to log into files
-log4js.configure(config.log4js);
+//log4js.configure(config.log4js);
 var logger = log4js.getLogger("NewSlidesHandler");
 
 //------------------------------------------------------------------------------------------------------
