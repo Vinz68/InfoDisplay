@@ -1,5 +1,5 @@
 {
-  "timestamp": "2016-06-16T11:13:48Z",
+  "timestamp": "2016-08-31T11:13:48Z",
   "pages": [
     {
       "title": "Weather - Buienradar",
@@ -14,28 +14,16 @@
       "url": "http://infoDisplay.cerner.com/verkeer.html"
     },
 	{
-	  "title": "Algemeen",
+	  "title": "Algemeen Nieuws",
 	  "type": "webpage",
 	  "interval": 20000,
 	  "url": "http://infodisplay.cerner.com/news/Nieuws_NL_BE"
 	},
     {
-      "title": "Gezondheid (NL)",
+      "title": "Gezondheidsnieuws",
       "type": "webpage",
       "interval": 20000,
-      "url": "http://infodisplay.cerner.com/news/GezondheidNews_NL"
-    },
-	{
-      "title": "Gezondheid (BE)",
-      "type": "webpage",
-      "interval": 20000,
-      "url": "http://infodisplay.cerner.com/news/GezondheidNews_BE"
-    },
-	{
-      "title": "Den Haag",
-      "type": "webpage",
-      "interval": 20000,
-      "url": "http://infodisplay.cerner.com/news/ADDenHaag_NL"
+      "url": "http://infodisplay.cerner.com/news/GezondheidNews"
     }
   ]
 }
