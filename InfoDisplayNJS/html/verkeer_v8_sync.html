@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Traffic The Hague Region</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?branch=release'></script>
+    <script type='text/javascript'>
+            function loadMapScenario() {
+                var map = new Microsoft.Maps.Map('#myMap', {
+                    credentials: 'AsUectBQ3WWEfwOmyjiOZ4169ogJig4LjYG0oal_MtBICP1GjSct3nxWcXAOD5gY',
+                    showDashboard: true,
+                    mapTypeId: Microsoft.Maps.MapTypeId.road,
+                    center: new Microsoft.Maps.Location(52.063873, 4.598103),
+                    zoom: 11
+                });
+
+                //Load traffic module.
+                Microsoft.Maps.loadModule('Microsoft.Maps.Traffic', function () {
+                    //Create an instance of the traffic manager and bind to map.
+                    trafficManager = new Microsoft.Maps.Traffic.TrafficManager(map);
+
+                    //Display the traffic data.
+                    trafficManager.show();
+                });
+
+
+            }
+    </script>
+</head>
+<body onload='loadMapScenario();'>
+    <div id='printoutPanel'></div>
+
+    <div id='myMap' style='width: 100vw; height: 100vh;'></div>
+</body>
+</html>
