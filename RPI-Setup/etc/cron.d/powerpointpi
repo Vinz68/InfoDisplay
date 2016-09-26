@@ -7,8 +7,8 @@
  # │ │ │ │ │
  # * * * * *  command to execute
 @reboot root /home/pi/scripts/boot.sh >/dev/null
-0    18   * * 1-5 root /home/pi/scripts/screen.sh off >/dev/null 2>&1
-0    9    * * 1-5 root /home/pi/scripts/screen.sh on >/dev/null 2>&1
+45    17   * * 1-5 root /home/pi/scripts/screen.sh off >/dev/null 2>&1
+55    7    * * 1-5 root /home/pi/scripts/screen.sh on >/dev/null 2>&1
 
 #0    19   * * 1-5 root /home/pi/scripts/stopOO.sh >/dev/null 2>&1
 #1    8    * * 1-5 root /home/pi/scripts/startOO.sh >/dev/null 2>&1
