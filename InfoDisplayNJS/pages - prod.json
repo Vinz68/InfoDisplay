@@ -5,25 +5,25 @@
       "title": "Weather - Buienradar",
       "type": "webpage",
       "interval": 20000,
-      "url": "http://infodisplay.fritz.box/weer.html"
+      "url": "http://infoDisplay.cerner.com/weer.html"
     },
     {
       "title": "Traffic - BingMap",
       "type": "webpage",
       "interval": 20000,
-      "url": "http://infodisplay.fritz.box/verkeer.html"
+      "url": "http://infoDisplay.cerner.com/verkeer.html"
     },
-    {
-      "title": "Algemeen Nieuws",
-      "type": "webpage",
-      "interval": 20000,
-      "url": "http://infodisplay.fritz.box/news/Nieuws_NL_BE"
-    },
+	{
+	  "title": "Algemeen Nieuws",
+	  "type": "webpage",
+	  "interval": 20000,
+	  "url": "http://infodisplay.cerner.com/news/Nieuws_NL_BE"
+	},
     {
       "title": "Gezondheidsnieuws",
       "type": "webpage",
       "interval": 20000,
-      "url": "http://infodisplay.fritz.box/news/GezondheidNews"
+      "url": "http://infodisplay.cerner.com/news/GezondheidNews"
     }
   ]
 }

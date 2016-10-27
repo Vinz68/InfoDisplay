@@ -16,8 +16,8 @@
 
 
 
-//var host = "powerpointpi.fritz!box.com:8081"; // (@home) Hostname + port where NodeJS REST-API is located(192.168.178.58)
-var host = "infodisplay.cerner.com";            // (Cerner) Hostname + port where NodeJS REST-API is located
+var host = "infodisplay.fritz.box"; // (@home) Hostname + port where NodeJS REST-API is located(192.168.178.76)
+//var host = "infodisplay.cerner.com";            // (Cerner) Hostname + port where NodeJS REST-API is located
 var slidesUrl = "http://" + host + "/slides";   // REST-API address to get list of (html) slide pages (embedding the PPTX- JPG images)
 var pagesUrl = "http://" + host + "/pages";     // REST-API address to get list of (html) pages
 

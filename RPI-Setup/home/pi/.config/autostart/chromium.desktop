@@ -1,0 +1,5 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Chromium-InfoDisplay
+Comment=Startup with InfoDisplay
+Exec=/bin/bash -c "sleep 30 && /usr/bin/chromium-browser --kiosk --disable-restore-session-state 'http://localhost/index.html'"

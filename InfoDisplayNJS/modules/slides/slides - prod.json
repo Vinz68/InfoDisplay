@@ -1,0 +1,41 @@
+{
+    "timestamp": "2016-08-19 16:29:25",
+    "pages": [
+        {
+            "title": "Cerner Info - Slide1",
+            "type": "webpage",
+            "interval": 10000,
+            "url": "http://infodisplay.cerner.com/Slide1.JPG.html"
+        },
+        {
+            "title": "Cerner Info - Slide2",
+            "type": "webpage",
+            "interval": 10000,
+            "url": "http://infodisplay.cerner.com/Slide2.JPG.html"
+        },
+        {
+            "title": "Cerner Info - Slide3",
+            "type": "webpage",
+            "interval": 10000,
+            "url": "http://infodisplay.cerner.com/Slide3.JPG.html"
+        },
+        {
+            "title": "Cerner Info - Slide4",
+            "type": "webpage",
+            "interval": 10000,
+            "url": "http://infodisplay.cerner.com/Slide4.JPG.html"
+        },
+        {
+            "title": "Cerner Info - Slide5",
+            "type": "webpage",
+            "interval": 10000,
+            "url": "http://infodisplay.cerner.com/Slide5.JPG.html"
+        },
+        {
+            "title": "Cerner Info - Slide6",
+            "type": "webpage",
+            "interval": 10000,
+            "url": "http://infodisplay.cerner.com/Slide6.JPG.html"
+        }
+    ]
+}
