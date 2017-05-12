@@ -1,11 +1,11 @@
-## InfoDisplay
+# InfoDisplay
 
 InfoDisplay is a simple solution for showing information, full screen in a kind of kiosk-mode slide show, using a client side web browser and server side NodeJS program.
 It can show any number of images (JPG) and/or web pages, providing that the web URL can be embeded in 
 an [iframe](http://www.w3schools.com/html/html_iframe.asp) 
 
 
-### Goals
+## Goals
 
 - Provide a cheap customizable kiosk-mode slide show for showing static and dynamic information
 - Must run on a cheap and small device which we can hidden behind a screen/monitor/TV (we use a Raspberry PI-3)
@@ -19,7 +19,7 @@ It is designed for small companies or personal usage to show:
 - Traffic information, in the region of the company, using Bing Map API
 - Other information, Like an Agenda,Weather and other News information, using web-urls to available information on the internet.
 
-####InfoDisplay consists of 3 project areas: 
+### InfoDisplay consists of 3 project areas: 
 
 * **[InfoDisplay Backend (InfoDisplayNJS)](#InfoDisplayNJS)** the sever backend (based on NodeJS) 
 * **[InfoDisplay Frontend (InfoDisplayFE)](#IInfoDisplayFE)**  the client side frontend (based on AngularJS)
